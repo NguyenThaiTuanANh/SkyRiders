@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6706dfccfc954b14fae7107f6f476a94, type: 3}
+  m_Name: SO_PlaneSkinDatabase
+  m_EditorClassIdentifier: 
+  skins:
+  - skinId: 0
+    skinName: No1
+    icon: {fileID: 0}
+    bulletPrefab: {fileID: 1997882812359486, guid: a042c70864cb14b4788110c1d5820c10,
+      type: 3}
+    bombPrefab: {fileID: 100006, guid: 61a1e6651c59e564c939c24df7567bb9, type: 3}
+    price: 0
+    defaultUnlocked: 1
+  - skinId: 0
+    skinName: 
+    icon: {fileID: 0}
+    bulletPrefab: {fileID: 0}
+    bombPrefab: {fileID: 0}
+    price: 0
+    defaultUnlocked: 0
+  - skinId: 0
+    skinName: 
+    icon: {fileID: 0}
+    bulletPrefab: {fileID: 0}
+    bombPrefab: {fileID: 0}
+    price: 0
+    defaultUnlocked: 0
+  - skinId: 0
+    skinName: 
+    icon: {fileID: 0}
+    bulletPrefab: {fileID: 0}
+    bombPrefab: {fileID: 0}
+    price: 0
+    defaultUnlocked: 0
+  - skinId: 0
+    skinName: 
+    icon: {fileID: 0}
+    bulletPrefab: {fileID: 0}
+    bombPrefab: {fileID: 0}
+    price: 0
+    defaultUnlocked: 0
