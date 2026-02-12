@@ -123,10 +123,10 @@ public class AirplaneController : MonoBehaviour
         // ===== BULLET (PC: chuột trái hoặc Fire1) =====
         bulletTimer += Time.deltaTime;
 #if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Mouse0))
-            isShooting = true;
-        else
-            isShooting = false;
+        //if (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Mouse0))
+        //    isShooting = true;
+        //else
+        //    isShooting = false;
 #endif
         // Auto-fire khi giữ button (isShooting = true)
         if (isShooting)
@@ -190,7 +190,7 @@ public class AirplaneController : MonoBehaviour
 
         // Lấy danh sách điểm spawn: ưu tiên bulletSpawnPoints, không có thì dùng bombSpawnPoint
         List<Transform> spawnPoints = new List<Transform>();
-        
+
         if (bulletSpawnPoints != null && bulletSpawnPoints.Count > 0)
         {
             foreach (var point in bulletSpawnPoints)
@@ -213,14 +213,24 @@ public class AirplaneController : MonoBehaviour
         }
 
         // Bullet di chuyển theo transform.right → cần xoay prefab sao cho right = hướng máy bay (forward)
-        Quaternion rot = Quaternion.FromToRotation(Vector3.right, transform.forward);
+        //Quaternion rot = Quaternion.FromToRotation(Vector3.right, transform.forward);
+        //Quaternion rot = Quaternion.LookRotation(transform.forward);
 
         // Spawn đạn tại tất cả các điểm
         foreach (var spawnPoint in spawnPoints)
         {
-            Vector3 pos = spawnPoint != null ? spawnPoint.position : transform.position + transform.forward * 1f;
-            GameObject go = Instantiate(bulletPrefab, pos, rot);
+            //Vector3 pos = spawnPoint != null ? spawnPoint.position : transform.position + transform.forward * 1f;
+            //GameObject go = Instantiate(bulletPrefab, pos, rot);
             // Bullet (speed, damage) dùng giá trị mặc định trên prefab
+
+            Vector3 pos = spawnPoint != null ? spawnPoint.position : transform.position + transform.forward * 1f;
+
+            Quaternion baseRot = spawnPoint != null ? spawnPoint.rotation : transform.rotation;
+
+            Quaternion finalRot = baseRot * Quaternion.Euler(30f, 0f, 0f);
+
+            Instantiate(bulletPrefab, pos, finalRot);
+
         }
     }
 
@@ -245,7 +255,7 @@ public class AirplaneController : MonoBehaviour
                 return;
             }
         }
-        else 
+        else
         {
             DamageShow dameNum = gameObject.GetComponent<DamageShow>();
             if (dameNum != null)

@@ -2917,7 +2917,7 @@ Transform:
   m_GameObject: {fileID: 167091748}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000119209275, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.521, y: 0.089998245, z: 2.4100018}
+  m_LocalPosition: {x: 2.521, y: 0.089998245, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17419,7 +17419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 853966581}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: point bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17434,7 +17434,7 @@ Transform:
   m_GameObject: {fileID: 853966580}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000119209275, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5500011, y: 0.089998245, z: 2.4100018}
+  m_LocalPosition: {x: -2.5500011, y: 0.089998245, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20597,10 +20597,12 @@ MonoBehaviour:
   bombSpawnPoint: {fileID: 1178879289}
   bombPrefab: {fileID: 100006, guid: 61a1e6651c59e564c939c24df7567bb9, type: 3}
   bombCooldown: 3
-  bulletPrefab: {fileID: 1997882812359486, guid: a042c70864cb14b4788110c1d5820c10,
+  bulletPrefab: {fileID: 1830508508936448, guid: 078ef97e128e8ac439c59086e4e534bf,
     type: 3}
-  bulletSpawnPoints: []
-  bulletCooldown: 0.15
+  bulletSpawnPoints:
+  - {fileID: 167091749}
+  - {fileID: 853966581}
+  bulletCooldown: 0.2
   skinDatabase: {fileID: 11400000, guid: a02d9f96677a7af4cab4dea60d091e66, type: 2}
   explosionFX: {fileID: 1759717452862977125, guid: e0cbbeaa506c8f44caf724fda4ab23bf,
     type: 3}
@@ -22104,7 +22106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1178879289}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PointBoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
