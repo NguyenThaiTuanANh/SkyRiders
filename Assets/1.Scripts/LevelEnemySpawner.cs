@@ -60,6 +60,10 @@ public class LevelEnemySpawner : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
+        // Tránh gọi LevelComplete khi đang xóa enemy cũ
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.BeginBatch();
+
         ClearSpawnedEnemies();
 
         SO_LevelData levelData = levelDatabase != null ? levelDatabase.GetLevel(levelIndex) : null;
@@ -75,9 +79,13 @@ public class LevelEnemySpawner : MonoBehaviour
         if (config != null)
         {
             ApplyPrePlacedConfig(config);
+            if (EnemyManager.Instance != null)
+                EnemyManager.Instance.EndBatch();
             return;
         }
 
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.EndBatch();
         DisableAllPrePlaced();
     }
 

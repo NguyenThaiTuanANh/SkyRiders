@@ -5048,7 +5048,7 @@ GameObject:
   - component: {fileID: 54705770189447398}
   m_Layer: 0
   m_Name: vfx_Projectile_BulletOrange
-  m_TagString: TankShot
+  m_TagString: CharShot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

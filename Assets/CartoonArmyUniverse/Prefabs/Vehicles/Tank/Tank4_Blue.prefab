@@ -117,12 +117,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   maxHP: 100
+  player: {fileID: 0}
   healthBar: {fileID: 0}
   detectionRange: 15
   bodyRotateSpeed: 8
   turretRotateSpeed: 60
   turret: {fileID: 4723606066065712, guid: 15ab5574402efc44fa3551c123b41ff4, type: 3}
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 4621043905367409616}
   shellPrefab: {fileID: 1997882812359486, guid: a042c70864cb14b4788110c1d5820c10,
     type: 3}
   fireCooldown: 2.5
@@ -329,6 +330,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b7128a1b911e9941aa17f3664c708f3, type: 3}
+--- !u!4 &4621043905367409616 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 711983230201919234, guid: 6b7128a1b911e9941aa17f3664c708f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5314324573705008338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8312712398511491012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4223507738939077398, guid: 6b7128a1b911e9941aa17f3664c708f3,

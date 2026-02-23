@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,9 +13,14 @@ public class LevelManager : MonoBehaviour
 
     [Header("Level Info")]
     public int levelIndex = 1;
+    public TMP_Text LevelInfor;
 
     [Header("Optional - assign to use reward from level data")]
     [SerializeField] private SO_LevelDatabase levelDatabase;
+
+    [Header("Scene Names")]
+    [Tooltip("Tên scene Main Menu (phải trùng Build Settings).")]
+    [SerializeField] private string mainMenuSceneName = "MainMenuScene";
 
     private bool levelFinished = false;
     private bool isPaused = false;
@@ -30,7 +36,10 @@ public class LevelManager : MonoBehaviour
         Instance = this;
 
         if (LevelToLoad > 0)
+        {
             levelIndex = LevelToLoad;
+            LevelInfor.text = "Level: " + LevelToLoad.ToString();
+        }
     }
 
     void Start()
@@ -106,6 +115,15 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    /// <summary>
+    /// Có level tiếp theo không (dùng để ẩn/hiện nút Next Level trên UI).
+    /// </summary>
+    public bool HasNextLevel()
+    {
+        if (levelDatabase == null) return false;
+        return levelDatabase.HasLevel(levelIndex + 1);
+    }
+
     public void NextLevel()
     {
         isPaused = false;
@@ -124,6 +142,13 @@ public class LevelManager : MonoBehaviour
             }
         }
 
+        // Không còn level: về Main Menu
+        if (levelDatabase != null && nextLevelIndex > levelDatabase.LevelCount)
+        {
+            SceneManager.LoadScene(mainMenuSceneName);
+            return;
+        }
+
         int nextBuildIndex = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(nextBuildIndex);
     }
@@ -132,7 +157,7 @@ public class LevelManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         isPaused = false;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     // ================= PAUSE =================

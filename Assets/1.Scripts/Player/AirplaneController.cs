@@ -39,6 +39,18 @@ public class AirplaneController : MonoBehaviour
     [Tooltip("Database skin. Nếu gán sẽ dùng đạn/bom của skin hiện tại (SaveLoadManager.CurrentSkinId).")]
     [SerializeField] private SO_PlaneSkinDatabase skinDatabase;
 
+    [Header("Skin Models (5 skin GameObjects)")]
+    [Tooltip("Danh sách 5 GameObject skin (skinId 0-4). Gán tay hoặc để trống để tự tìm theo tên 'Skin0', 'Skin1', ...")]
+    [SerializeField] private List<GameObject> skinModels = new List<GameObject>();
+
+    [Tooltip("Tự động tìm skin models theo tên nếu skinModels trống.")]
+    [SerializeField] private bool autoFindSkinModels = true;
+
+    [Tooltip("Prefix tên skin model để tự tìm (vd: 'Skin' → tìm 'Skin0', 'Skin1', ...).")]
+    [SerializeField] private string skinNamePrefix = "Skin";
+
+    public static AirplaneController Instance { get; private set; }
+
     private float Yaw;
     private float bombTimer;
     private float bulletTimer;
@@ -49,6 +61,13 @@ public class AirplaneController : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         playerHealth = GetComponent<PlayerHealth>();
         if (playerHealth != null)
             playerHealth.explosionFX = explosionFX;
@@ -56,7 +75,89 @@ public class AirplaneController : MonoBehaviour
 
     void Start()
     {
+        InitializeSkinModels();
+        ApplyCurrentSkin();
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
+
+    /// <summary>
+    /// Khởi tạo danh sách skin models: gán tay hoặc tự tìm theo tên.
+    /// </summary>
+    private void InitializeSkinModels()
+    {
+        if (skinModels == null)
+            skinModels = new List<GameObject>();
+
+        // Nếu đã gán đủ 5 skin thì không cần tìm
+        if (skinModels.Count >= SO_PlaneSkinDatabase.SKIN_COUNT)
+        {
+            // Đảm bảo có đủ 5 phần tử
+            while (skinModels.Count < SO_PlaneSkinDatabase.SKIN_COUNT)
+                skinModels.Add(null);
+            return;
+        }
+
+        if (autoFindSkinModels)
+        {
+            // Tìm các child object theo tên: Skin0, Skin1, Skin2, Skin3, Skin4
+            skinModels.Clear();
+            for (int i = 0; i < SO_PlaneSkinDatabase.SKIN_COUNT; i++)
+            {
+                string skinName = skinNamePrefix + i;
+                Transform child = transform.Find(skinName);
+                if (child == null)
+                {
+                    // Thử tìm trong toàn bộ children (không phân biệt chữ hoa/thường)
+                    foreach (Transform t in transform)
+                    {
+                        if (t.name.Equals(skinName, System.StringComparison.OrdinalIgnoreCase) ||
+                            t.name.Contains(skinName) || t.name.Contains("Skin" + i))
+                        {
+                            child = t;
+                            break;
+                        }
+                    }
+                }
+                skinModels.Add(child != null ? child.gameObject : null);
+            }
+        }
+        else
+        {
+            // Đảm bảo có đủ 5 phần tử
+            while (skinModels.Count < SO_PlaneSkinDatabase.SKIN_COUNT)
+                skinModels.Add(null);
+        }
+    }
+
+    /// <summary>
+    /// Áp dụng skin hiện tại: model + weapon (đạn/bom).
+    /// </summary>
+    public void ApplyCurrentSkin()
+    {
+        ApplyCurrentSkinModel();
         ApplyCurrentSkinWeapons();
+    }
+
+    /// <summary>
+    /// Áp dụng model skin: enable skin đang chọn, disable các skin khác.
+    /// </summary>
+    public void ApplyCurrentSkinModel()
+    {
+        if (SaveLoadManager.Instance == null) return;
+
+        int currentSkinId = SaveLoadManager.Instance.CurrentSkinId;
+
+        // Enable/disable từng skin model
+        for (int i = 0; i < skinModels.Count && i < SO_PlaneSkinDatabase.SKIN_COUNT; i++)
+        {
+            if (skinModels[i] != null)
+                skinModels[i].SetActive(i == currentSkinId);
+        }
     }
 
     /// <summary>
@@ -236,12 +337,37 @@ public class AirplaneController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("TankShot"))
+        if (collision.gameObject.CompareTag("TankShot"))
         {
             //GameObject vfx =  Instantiate(explosionFX, transform.position, Quaternion.identity);
             //Destroy(vfx, 0.5f);
             //Destroy(gameObject);
             //LevelManager.Instance.GameOver();
+            PlayerHealth player = gameObject.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(30f);
+                DamageShow dameNum = gameObject.GetComponent<DamageShow>();
+                if (dameNum != null)
+                {
+                    //Debug.Log("HitDame");
+                    dameNum.ShowDamage(30, gameObject.transform.position);
+                }
+                return;
+            }
+        }
+        else if (collision.gameObject.CompareTag("CharShot"))
+        {
+            DamageShow dameNum = gameObject.GetComponent<DamageShow>();
+            PlayerHealth player = gameObject.GetComponent<PlayerHealth>();
+            if (dameNum != null)
+            {
+                player.TakeDamage(10f);
+                dameNum.ShowDamage(10, gameObject.transform.position);
+            }
+        }
+        else
+        {
             PlayerHealth player = gameObject.GetComponent<PlayerHealth>();
             if (player != null)
             {
@@ -253,15 +379,6 @@ public class AirplaneController : MonoBehaviour
                     dameNum.ShowDamage(100, gameObject.transform.position);
                 }
                 return;
-            }
-        }
-        else
-        {
-            DamageShow dameNum = gameObject.GetComponent<DamageShow>();
-            if (dameNum != null)
-            {
-                Debug.Log("HitDame");
-                dameNum.ShowDamage(30, gameObject.transform.position);
             }
         }
     }

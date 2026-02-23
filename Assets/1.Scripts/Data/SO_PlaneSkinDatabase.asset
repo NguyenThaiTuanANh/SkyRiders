@@ -21,7 +21,7 @@ MonoBehaviour:
     bombPrefab: {fileID: 100006, guid: 61a1e6651c59e564c939c24df7567bb9, type: 3}
     price: 0
     defaultUnlocked: 1
-  - skinId: 0
+  - skinId: 1
     skinName: 
     icon: {fileID: 0}
     bulletPrefab: {fileID: 0}

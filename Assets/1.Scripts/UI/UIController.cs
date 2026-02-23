@@ -10,6 +10,10 @@ public class UIController : MonoBehaviour
     public GameObject levelCompleteUI;
     public GameObject pauseUI;
 
+    [Header("Level Complete")]
+    [Tooltip("Nút Next Level - ẩn khi không còn level tiếp theo.")]
+    public GameObject nextLevelButton;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -54,6 +58,9 @@ public class UIController : MonoBehaviour
         gameOverUI?.SetActive(false);
         levelCompleteUI?.SetActive(true);
         pauseUI?.SetActive(false);
+
+        if (nextLevelButton != null && LevelManager.Instance != null)
+            nextLevelButton.SetActive(LevelManager.Instance.HasNextLevel());
 
 #if UNITY_EDITOR
         Debug.Log("UI: Level Complete");

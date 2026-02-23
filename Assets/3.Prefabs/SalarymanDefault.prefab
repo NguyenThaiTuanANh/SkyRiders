@@ -9601,7 +9601,7 @@ MonoBehaviour:
   enemyType: 0
   maxHP: 100
   player: {fileID: 0}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 6806297431883818983}
   detectionRange: 15
   rotateSpeed: 50
   firePoint: {fileID: 4960416276344278077}
@@ -10363,3 +10363,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 114885418505379202}
   fakeBar: {fileID: 107817472846631727}
+--- !u!114 &6806297431883818983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9079595880444361974, guid: 45b76462cbd99c24989f3cccd47cb599,
+    type: 3}
+  m_PrefabInstance: {fileID: 2339029753407396625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2362577240129393686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90e4ab25493692429b3b4dc128f7906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

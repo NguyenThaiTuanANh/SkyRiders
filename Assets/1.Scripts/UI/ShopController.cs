@@ -103,6 +103,15 @@ public class ShopController : MonoBehaviour
         }
 
         SaveLoadManager.Instance.UnlockSkin(skinId);
+        
+        // Tự động set làm skin hiện tại khi mua thành công
+        if (SaveLoadManager.Instance.SetCurrentSkin(skinId))
+        {
+            // Áp dụng skin vào gameplay nếu đang chơi
+            if (AirplaneController.Instance != null)
+                AirplaneController.Instance.ApplyCurrentSkin();
+        }
+
         RefreshAllSlots();
         RefreshCoin();
         if (UIMainMenu.Instance != null)
@@ -118,6 +127,10 @@ public class ShopController : MonoBehaviour
         if (SaveLoadManager.Instance == null) return;
         if (SaveLoadManager.Instance.SetCurrentSkin(skinId))
         {
+            // Áp dụng skin vào gameplay nếu đang chơi
+            if (AirplaneController.Instance != null)
+                AirplaneController.Instance.ApplyCurrentSkin();
+
             RefreshAllSlots();
             ShowMessage("Đã đổi skin!");
         }

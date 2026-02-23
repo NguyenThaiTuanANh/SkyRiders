@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -56,6 +57,7 @@ public class EnemyManager : MonoBehaviour
     public void EndBatch()
     {
         suppressCompletion = false;
+        Debug.Log("LEVel" + enemies.Count);
         if (enemies.Count == 0 && LevelManager.Instance != null)
             LevelManager.Instance.LevelComplete(); // Win: hết enemy => hoàn thành level
     }

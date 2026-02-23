@@ -32,4 +32,17 @@ public class SO_LevelDatabase : ScriptableObject
         }
         return null;
     }
+
+    /// <summary>
+    /// Tổng số level trong database (1-based count).
+    /// </summary>
+    public int LevelCount => levels != null ? levels.Count : 0;
+
+    /// <summary>
+    /// Có tồn tại level tiếp theo sau levelIndex không.
+    /// </summary>
+    public bool HasLevel(int levelNumber)
+    {
+        return levels != null && levelNumber >= 1 && levelNumber <= levels.Count;
+    }
 }

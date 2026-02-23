@@ -33,11 +33,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        //if (player == null)
-        //{
-        //    GameObject playerObj = GameObject.FindWithTag("Player");
-        //    if (playerObj != null) player = playerObj.transform;
-        //}
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null) player = playerObj.transform;
+        }
 
         if (health != null)
         {
@@ -88,5 +88,13 @@ public abstract class EnemyBase : MonoBehaviour
         }
         if (health != null)
             health.TakeDamage(amount);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("CharShot"))
+        {
+            TakeDamage(50);
+        }
     }
 }

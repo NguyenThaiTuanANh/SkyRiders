@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Simple player health for receiving enemy damage and collisions.
@@ -11,6 +13,9 @@ public class PlayerHealth : MonoBehaviour
     private float currentHealth;
     private bool dead;
 
+    public Slider healthBar;
+    //public Slider fakeBar;
+
     void Awake()
     {
         ResetHealth();
@@ -18,14 +23,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetHealth()
     {
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
         dead = false;
+        SetHealth(maxHealth);
     }
 
     public void TakeDamage(float amount)
     {
         if (dead || amount <= 0f) return;
         currentHealth -= amount;
+        SetFill(currentHealth);
         if (currentHealth <= 0f)
         {
             Die();
@@ -48,4 +55,32 @@ public class PlayerHealth : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    public void SetHealth(float health)
+    {
+        currentHealth = health;
+        healthBar.maxValue = health;
+        healthBar.value = health;
+        healthBar.enabled = true;
+        //fakeBar.maxValue = health;
+        //fakeBar.value = health;
+        //fakeBar.enabled = true;
+    }
+
+    public void SetFill(float Health)
+    {
+        currentHealth = Health;
+
+        healthBar.value = currentHealth;
+        if (healthBar.value <= 0) healthBar.value = 0;
+        //StartCoroutine(FakeBarWaitCO());
+
+    }
+
+
+    //IEnumerator FakeBarWaitCO()
+    //{
+    //    yield return new WaitForSeconds(0.3f);
+    //    fakeBar.value = currentHealth;
+    //}
 }
