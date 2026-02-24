@@ -1,9 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     public static UIController Instance { get; private set; }
-
+    [SerializeField] private TMP_Text coinText;
     [Header("UI Panels")]
     public GameObject gameplayUI;
     public GameObject gameOverUI;
@@ -65,6 +66,13 @@ public class UIController : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("UI: Level Complete");
 #endif
+    }
+
+    public void UpdateCoinUI()
+    {
+        if (coinText == null) return;
+        int coin = SaveLoadManager.Instance != null ? SaveLoadManager.Instance.Coin : 0;
+        coinText.text = coin.ToString();
     }
 
     public void ShowPauseUI()

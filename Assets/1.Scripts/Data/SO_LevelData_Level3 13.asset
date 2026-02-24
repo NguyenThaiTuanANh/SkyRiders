@@ -21,7 +21,8 @@ MonoBehaviour:
       type: 3}
     amount: 6
   - enemyType: 1
-    enemyPrefab: {fileID: 0}
+    enemyPrefab: {fileID: 8937412872075663793, guid: 54c0f6c65d9be5e42847b1a77000c2bb,
+      type: 3}
     amount: 6
   - enemyType: 3
     enemyPrefab: {fileID: 0}

@@ -7,6 +7,7 @@ using System;
 [Serializable]
 public class PlayerSaveData
 {
+    [Tooltip("Số coin (lưu PlayerPrefs, hiển thị UI). + khi win level, - khi mua skin.")]
     public int coin;
     public int bombLevel;
     public bool unlockGun;
@@ -32,6 +33,11 @@ public class SaveLoadManager : MonoBehaviour
     public static SaveLoadManager Instance { get; private set; }
 
     const string KEY = "PLAYER_DATA";
+
+    /// <summary>
+    /// Phát khi coin thay đổi (AddCoin/SpendCoin). UI có thể subscribe để cập nhật hiển thị.
+    /// </summary>
+    public static event Action<int> OnCoinChanged;
 
     public PlayerSaveData Data = new PlayerSaveData();
 
@@ -82,6 +88,7 @@ public class SaveLoadManager : MonoBehaviour
 
     void EnsureDefaultLevelProgress()
     {
+        if (Data.coin < 0) Data.coin = 0;
         if (Data.levelUnlocked < 1) Data.levelUnlocked = 1;
         if (Data.levelCurrent < 1) Data.levelCurrent = 1;
         if (string.IsNullOrEmpty(Data.unlockedSkinIds)) Data.unlockedSkinIds = "0";

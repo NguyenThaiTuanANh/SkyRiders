@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     public GameObject explosionFX;
+    public GameObject hpLowFX;
 
     private float currentHealth;
     private bool dead;
