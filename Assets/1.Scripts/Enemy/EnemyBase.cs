@@ -77,6 +77,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             anim.PlayDie();
         }
+        KillManager.Instance.AddKill();
         Destroy(gameObject, 0.5f);
     }
 

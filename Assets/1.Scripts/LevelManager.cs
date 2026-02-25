@@ -37,7 +37,8 @@ public class LevelManager : MonoBehaviour
 
         if (LevelToLoad > 0)
         {
-            levelIndex = LevelToLoad;
+            //levelIndex = LevelToLoad;
+            levelIndex = 9;
             LevelInfor.text = "Level: " + LevelToLoad.ToString();
         }
     }

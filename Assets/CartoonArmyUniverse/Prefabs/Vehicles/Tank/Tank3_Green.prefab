@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1257051265627410970, guid: 025f3820e4fa4744580d67fb55eb3bc3,
+        type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 7125296167553828836}
+    - target: {fileID: -1257051265627410970, guid: 025f3820e4fa4744580d67fb55eb3bc3,
+        type: 3}
+      propertyPath: enemyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1984134178367210, guid: 025f3820e4fa4744580d67fb55eb3bc3, type: 3}
       propertyPath: m_Name
       value: Tank3_Green
@@ -71,3 +81,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 025f3820e4fa4744580d67fb55eb3bc3, type: 3}
+--- !u!4 &7125296167553828836 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4496853913634610, guid: 025f3820e4fa4744580d67fb55eb3bc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7128594310049464534}
+  m_PrefabAsset: {fileID: 0}

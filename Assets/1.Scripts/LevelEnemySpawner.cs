@@ -89,6 +89,33 @@ public class LevelEnemySpawner : MonoBehaviour
         DisableAllPrePlaced();
     }
 
+    //private void SpawnFromLevelData(SO_LevelData levelData)
+    //{
+    //    if (EnemyManager.Instance != null)
+    //        EnemyManager.Instance.BeginBatch();
+
+    //    DisableAllPrePlaced();
+
+    //    foreach (LevelEnemyEntry entry in levelData.enemyData)
+    //    {
+    //        if (entry == null || entry.enemyPrefab == null || entry.amount <= 0)
+    //            continue;
+
+    //        for (int i = 0; i < entry.amount; i++)
+    //        {
+    //            Vector3 pos = GetSpawnPositionForType(entry.enemyType, i);
+    //            Quaternion rot = Quaternion.identity;
+    //            GameObject go = Instantiate(entry.enemyPrefab, pos, rot);
+    //            var enemy = go.GetComponent<EnemyBase>();
+    //            if (enemy != null)
+    //                spawnedEnemies.Add(enemy);
+    //        }
+    //    }
+
+    //    if (EnemyManager.Instance != null)
+    //        EnemyManager.Instance.EndBatch();
+    //}
+
     private void SpawnFromLevelData(SO_LevelData levelData)
     {
         if (EnemyManager.Instance != null)
@@ -101,11 +128,30 @@ public class LevelEnemySpawner : MonoBehaviour
             if (entry == null || entry.enemyPrefab == null || entry.amount <= 0)
                 continue;
 
-            for (int i = 0; i < entry.amount; i++)
+            // Lấy danh sách spawn point cho loại enemy này
+            List<Transform> availablePoints = GetAvailablePointsForType(entry.enemyType);
+
+            // Shuffle để random thứ tự
+            ShuffleList(availablePoints);
+
+            int spawnCount = entry.amount;
+
+            for (int i = 0; i < spawnCount; i++)
             {
-                Vector3 pos = GetSpawnPositionForType(entry.enemyType, i);
-                Quaternion rot = Quaternion.identity;
-                GameObject go = Instantiate(entry.enemyPrefab, pos, rot);
+                Vector3 pos;
+
+                // Nếu còn point chưa dùng → lấy theo index
+                if (i < availablePoints.Count && availablePoints[i] != null)
+                {
+                    pos = availablePoints[i].position;
+                }
+                else
+                {
+                    // Nếu hết point → fallback random
+                    pos = GetDefaultSpawnPosition();
+                }
+
+                GameObject go = Instantiate(entry.enemyPrefab, pos, Quaternion.identity);
                 var enemy = go.GetComponent<EnemyBase>();
                 if (enemy != null)
                     spawnedEnemies.Add(enemy);
@@ -114,6 +160,41 @@ public class LevelEnemySpawner : MonoBehaviour
 
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.EndBatch();
+    }
+
+    private List<Transform> GetAvailablePointsForType(EnemyType enemyType)
+    {
+        if (spawnPointsByType != null)
+        {
+            foreach (var group in spawnPointsByType)
+            {
+                if (group != null &&
+                    group.enemyType == enemyType &&
+                    group.points != null &&
+                    group.points.Count > 0)
+                {
+                    return new List<Transform>(group.points);
+                }
+            }
+        }
+
+        if (fallbackSpawnPoints != null && fallbackSpawnPoints.Count > 0)
+        {
+            return new List<Transform>(fallbackSpawnPoints);
+        }
+
+        return new List<Transform>();
+    }
+
+    private void ShuffleList<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int randomIndex = Random.Range(i, list.Count);
+            T temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
     }
 
     /// <summary>

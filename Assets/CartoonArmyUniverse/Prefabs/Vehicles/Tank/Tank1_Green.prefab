@@ -8,6 +8,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6131649760932172937, guid: 02d8d61efd6f57f47b847a55f2a9bff4,
+        type: 3}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 4757073646041866246}
+    - target: {fileID: -6131649760932172937, guid: 02d8d61efd6f57f47b847a55f2a9bff4,
+        type: 3}
+      propertyPath: enemyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1094257964433266, guid: 02d8d61efd6f57f47b847a55f2a9bff4, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -103,6 +113,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -6246199686422863166}
   m_SourcePrefab: {fileID: 100100000, guid: 02d8d61efd6f57f47b847a55f2a9bff4, type: 3}
+--- !u!4 &4757073646041866246 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4381502313851244, guid: 02d8d61efd6f57f47b847a55f2a9bff4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4758921289426356586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4760029486286238180 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1143680806467726, guid: 02d8d61efd6f57f47b847a55f2a9bff4,
@@ -136,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   maxHP: 100
+  player: {fileID: 0}
   healthBar: {fileID: 0}
   detectionRange: 20
   bodyRotateSpeed: 6

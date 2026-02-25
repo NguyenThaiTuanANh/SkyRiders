@@ -1803,6 +1803,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 568813835}
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnNextLevelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 82152367062947615, guid: 255736db8304a614b9687a939af2de92,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 922643301087584792, guid: 255736db8304a614b9687a939af2de92,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3872,6 +3907,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 212441939}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &224851990 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3751945456199021135, guid: 255736db8304a614b9687a939af2de92,
+    type: 3}
+  m_PrefabInstance: {fileID: 101903871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &227621540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8912,7 +8959,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6019563093470966895, guid: 957d5a95ef70c004aab1bce2fdd88f6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 568813837}
   m_SourcePrefab: {fileID: 100100000, guid: 957d5a95ef70c004aab1bce2fdd88f6e, type: 3}
 --- !u!114 &568813835 stripped
 MonoBehaviour:
@@ -8920,12 +8971,31 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 568813834}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 568813836}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b37dd6946285f5f4b9a5f661d464d909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &568813836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6019563093470966895, guid: 957d5a95ef70c004aab1bce2fdd88f6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 568813834}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &568813837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568813836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 849c9584bb61e974aad03bf5b891a0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killText: {fileID: 224851990}
 --- !u!1001 &573053617
 PrefabInstance:
   m_ObjectHideFlags: 0

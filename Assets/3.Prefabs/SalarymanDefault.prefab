@@ -9607,9 +9607,9 @@ MonoBehaviour:
   firePoint: {fileID: 4960416276344278077}
   bulletPrefab: {fileID: 1830508508936448, guid: 078ef97e128e8ac439c59086e4e534bf,
     type: 3}
-  fireCooldown: 2
-  burstCount: 3
-  burstInterval: 0.4
+  fireCooldown: 3
+  burstCount: 2
+  burstInterval: 0.6
 --- !u!65 &4376613711860924096
 BoxCollider:
   m_ObjectHideFlags: 0
