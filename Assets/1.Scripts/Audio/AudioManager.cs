@@ -99,7 +99,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopBGM()
     {
-        bgmSource.Stop();
+        if(bgmSource != null) bgmSource.Stop();
     }
 
     public void SetBGMEnabled(bool enabled)

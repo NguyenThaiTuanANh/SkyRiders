@@ -64,6 +64,7 @@ public class SoldierEnemy : EnemyBase
     {
         Vector3 dir = (player.position - firePoint.position).normalized;
         Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
+        GamePlaySoudVFX.Instance.EnemyFire();
         Instantiate(bulletPrefab, firePoint.position, rot);
     }
 

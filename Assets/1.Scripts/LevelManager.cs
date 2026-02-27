@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
     private bool levelFinished = false;
     private bool isPaused = false;
 
+    public int reward = 0;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,8 +39,8 @@ public class LevelManager : MonoBehaviour
 
         if (LevelToLoad > 0)
         {
-            //levelIndex = LevelToLoad;
-            levelIndex = 9;
+            levelIndex = LevelToLoad;
+            //levelIndex = 9;
             LevelInfor.text = "Level: " + LevelToLoad.ToString();
         }
     }
@@ -68,14 +70,13 @@ public class LevelManager : MonoBehaviour
         if (levelFinished) return;
         levelFinished = true;
 
-        Time.timeScale = 0.5f;
+        //Time.timeScale = 0.5f;
 
 #if UNITY_EDITOR
         Debug.Log("LEVEL COMPLETE!");
 #endif
 
         // Reward coin from level data if available
-        int reward = 100;
         if (levelDatabase != null)
         {
             SO_LevelData levelData = levelDatabase.GetLevel(levelIndex);
@@ -87,7 +88,8 @@ public class LevelManager : MonoBehaviour
             SaveLoadManager.Instance.AddCoin(reward);
             SaveLoadManager.Instance.UnlockNextLevel(levelIndex);
         }
-
+        MusicPlayer.Stop();
+       GamePlaySoudVFX.Instance.PlayWin();
         if (UIController.Instance != null)
             UIController.Instance.ShowLevelComplete();
     }

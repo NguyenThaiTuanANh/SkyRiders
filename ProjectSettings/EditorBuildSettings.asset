@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0.Scenes/GamePlay_Winter.unity
     guid: 10a04268559de72468aced73d952a7ca
+  - enabled: 1
+    path: Assets/0.Scenes/GamePlay_Desert.unity
+    guid: d568e7c0a5bd6714baf4dd812372f963
+  - enabled: 1
+    path: Assets/0.Scenes/GamePlay_Woodland.unity
+    guid: 28894ae71e88c8f4b8a9f789ae6aa67c
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

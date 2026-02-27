@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SO_LevelData_Level3 12
   m_EditorClassIdentifier: 
   levelIndex: 15
-  sceneName: GamePlay_Desert
+  sceneName: GamePlay_Woodland
   rewardCoin: 200
   enemyData:
   - enemyType: 0

@@ -329,6 +329,7 @@ public class AirplaneController : MonoBehaviour
             Quaternion baseRot = spawnPoint != null ? spawnPoint.rotation : transform.rotation;
 
             Quaternion finalRot = baseRot * Quaternion.Euler(30f, 0f, 0f);
+            GamePlaySoudVFX.Instance.PlayerFire();
 
             Instantiate(bulletPrefab, pos, finalRot);
 
@@ -346,12 +347,12 @@ public class AirplaneController : MonoBehaviour
             PlayerHealth player = gameObject.GetComponent<PlayerHealth>();
             if (player != null)
             {
-                player.TakeDamage(30f);
+                player.TakeDamage(10f);
                 DamageShow dameNum = gameObject.GetComponent<DamageShow>();
                 if (dameNum != null)
                 {
                     //Debug.Log("HitDame");
-                    dameNum.ShowDamage(30, gameObject.transform.position);
+                    dameNum.ShowDamage(10, gameObject.transform.position);
                 }
                 return;
             }
@@ -362,8 +363,8 @@ public class AirplaneController : MonoBehaviour
             PlayerHealth player = gameObject.GetComponent<PlayerHealth>();
             if (dameNum != null)
             {
-                player.TakeDamage(10f);
-                dameNum.ShowDamage(10, gameObject.transform.position);
+                player.TakeDamage(5f);
+                dameNum.ShowDamage(5, gameObject.transform.position);
             }
         }
         else

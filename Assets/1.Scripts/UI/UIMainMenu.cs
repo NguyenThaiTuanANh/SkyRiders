@@ -10,6 +10,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject UiLevelSelect;
     [SerializeField] private GameObject SettingPopup;
     [SerializeField] private GameObject ShopPopup;
+    [SerializeField] public GameObject Loading;
 
     public static UIMainMenu Instance { get; private set; }
 

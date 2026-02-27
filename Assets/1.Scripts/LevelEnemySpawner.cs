@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,18 +61,27 @@ public class LevelEnemySpawner : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
+        StartCoroutine(LoadLevelWithDelay(levelIndex));
+    }
+    private IEnumerator LoadLevelWithDelay(int levelIndex)
+    {
         // Tránh gọi LevelComplete khi đang xóa enemy cũ
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.BeginBatch();
 
         ClearSpawnedEnemies();
 
-        SO_LevelData levelData = levelDatabase != null ? levelDatabase.GetLevel(levelIndex) : null;
+        // Chờ 5 giây trước khi spawn
+        yield return new WaitForSeconds(5f);
+
+        SO_LevelData levelData = levelDatabase != null
+            ? levelDatabase.GetLevel(levelIndex)
+            : null;
 
         if (levelData != null && levelData.enemyData != null && levelData.enemyData.Count > 0)
         {
             SpawnFromLevelData(levelData);
-            return;
+            yield break;
         }
 
         // Fallback: pre-placed config
@@ -81,11 +91,12 @@ public class LevelEnemySpawner : MonoBehaviour
             ApplyPrePlacedConfig(config);
             if (EnemyManager.Instance != null)
                 EnemyManager.Instance.EndBatch();
-            return;
+            yield break;
         }
 
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.EndBatch();
+
         DisableAllPrePlaced();
     }
 

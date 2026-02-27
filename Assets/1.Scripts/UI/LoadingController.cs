@@ -1,10 +1,13 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadingController : MonoBehaviour
 {
+    [Header("Audio")]
+    [SerializeField] private AudioClip loadingClip;
+    private AudioSource loadingAudioSource;
     [Header("Attributes")]
     [SerializeField] private float timeLoading = 5f;
 
@@ -12,15 +15,10 @@ public class LoadingController : MonoBehaviour
     [SerializeField] private Image progressBar;
     [SerializeField] private TextMeshProUGUI loadingText;
     [SerializeField] private GameObject[] firstActiveObjects;
-    //[SerializeField] private UIMainMenuTitleEffect_Enhanced vfxTitle;
-
-    //private AsyncOperation _sceneOperation;
     private float _timer = 0f;
 
     void Start()
     {
-        //_sceneOperation = SceneManager.LoadSceneAsync("GameplayScene");
-        //_sceneOperation.allowSceneActivation = false;
 
         progressBar.fillAmount = 0;
         loadingText.text = "0%";
@@ -28,6 +26,14 @@ public class LoadingController : MonoBehaviour
         {
             item.SetActive(false);
         }
+        // 🔇 Dừng BGM hiện tại
+        MusicPlayer.Stop();
+
+        // ▶️ Tạo AudioSource và phát loading sound
+        loadingAudioSource = gameObject.AddComponent<AudioSource>();
+        loadingAudioSource.clip = loadingClip;
+        loadingAudioSource.loop = true;
+        loadingAudioSource.Play();
     }
 
     void Update()
@@ -43,12 +49,27 @@ public class LoadingController : MonoBehaviour
         }
         else
         {
-            //_sceneOperation.allowSceneActivation = true;
+            // 🔇 Tắt loading sound
+            if (loadingAudioSource != null)
+            {
+                loadingAudioSource.Stop();
+            }
+
+            // ▶️ Phát lại BGM theo scene hiện tại
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (GameSceneManager.Instance != null)
+            {
+                if (currentScene.name == GameSceneManager.Instance.mainMenuScene)
+                    MusicPlayer.Play(GameSceneManager.Instance.mainMenuBGM);
+                else
+                    MusicPlayer.Play(GameSceneManager.Instance.gamePlayBGM);
+            }
+
             foreach (var item in firstActiveObjects)
             {
                 item.SetActive(true);
             }
-            //if (vfxTitle != null) vfxTitle.PlayIntro();
+
             gameObject.SetActive(false);
         }
     }

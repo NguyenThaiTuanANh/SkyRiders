@@ -75,8 +75,10 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (enemyType == EnemyType.Soldier)
         {
+            GamePlaySoudVFX.Instance.EnemyDie();
             anim.PlayDie();
         }
+        else GamePlaySoudVFX.Instance.TankDiePlay();
         KillManager.Instance.AddKill();
         Destroy(gameObject, 0.5f);
     }
@@ -93,9 +95,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("CharShot"))
+        if (collision.gameObject.CompareTag("CharShot") || collision.gameObject.CompareTag("TankShot"))
         {
-            TakeDamage(50);
+            TakeDamage(25);
         }
     }
 }

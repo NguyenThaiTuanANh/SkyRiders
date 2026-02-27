@@ -15,6 +15,9 @@ public class UIController : MonoBehaviour
     [Tooltip("Nút Next Level - ẩn khi không còn level tiếp theo.")]
     public GameObject nextLevelButton;
 
+    public TMP_Text LevelInfor;
+    public TMP_Text CoinRew;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,6 +32,7 @@ public class UIController : MonoBehaviour
     void Start()
     {
         ShowGameplayUI();
+        UpdateCoinUI();
     }
 
     // ================= SHOW UI =================
@@ -59,6 +63,8 @@ public class UIController : MonoBehaviour
         gameOverUI?.SetActive(false);
         levelCompleteUI?.SetActive(true);
         pauseUI?.SetActive(false);
+        LevelInfor.text = LevelManager.LevelToLoad.ToString();
+        CoinRew.text = LevelManager.Instance.reward.ToString();
 
         if (nextLevelButton != null && LevelManager.Instance != null)
             nextLevelButton.SetActive(LevelManager.Instance.HasNextLevel());

@@ -8,14 +8,15 @@ using TMPro;
 public class ShopSkinSlot : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private Image iconImage;
-    [SerializeField] private TMP_Text nameText;
+    //[SerializeField] private Image iconImage;
+    //[SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private GameObject lockOverlay;
     [SerializeField] private Button buyButton;
     [SerializeField] private Button useButton;
     [SerializeField] private TMP_Text useButtonText;
-    [SerializeField] private GameObject selectedBadge;
+    [SerializeField] private ShopController shop;
+    //[SerializeField] private GameObject selectedBadge;
 
     private int skinId;
     private PlaneSkinData data;
@@ -36,28 +37,40 @@ public class ShopSkinSlot : MonoBehaviour
         data = skinData;
         skinId = skinData.skinId;
 
-        if (nameText != null) nameText.text = skinData.skinName;
-        if (priceText != null) priceText.text = skinData.price <= 0 ? "FREE" : skinData.price.ToString();
-        if (iconImage != null && skinData.icon != null) iconImage.sprite = skinData.icon;
+        if (priceText != null)
+            priceText.text = skinData.price <= 0 ? "FREE" : skinData.price.ToString();
 
-        if (lockOverlay != null) lockOverlay.SetActive(!unlocked);
-        if (buyButton != null) buyButton.gameObject.SetActive(!unlocked);
-        if (useButton != null) useButton.gameObject.SetActive(unlocked);
-        if (useButtonText != null) useButtonText.text = isCurrent ? "Đang dùng" : "Dùng";
-        if (useButton != null) useButton.interactable = !isCurrent;
-        if (selectedBadge != null) selectedBadge.SetActive(isCurrent);
+        // ===== LOCK =====
+        if (!unlocked)
+        {
+            lockOverlay?.SetActive(true);
+            buyButton?.gameObject.SetActive(true);
+            useButton?.gameObject.SetActive(false);
+            return;
+        }
+
+        // ===== UNLOCKED =====
+        lockOverlay?.SetActive(false);
+        buyButton?.gameObject.SetActive(false);
+        useButton?.gameObject.SetActive(true);
+
+        if (useButtonText != null)
+            useButtonText.text = isCurrent ? "Used" : "Use";
+
+        if (useButton != null)
+            useButton.interactable = !isCurrent;
     }
 
     void OnBuyClick()
     {
-        ShopController shop = GetComponentInParent<ShopController>();
+        //ShopController shop = GetComponentInParent<ShopController>();
         if (shop != null)
             shop.TryBuySkin(skinId);
     }
 
     void OnUseClick()
     {
-        ShopController shop = GetComponentInParent<ShopController>();
+        //ShopController shop = GetComponentInParent<ShopController>();
         if (shop != null)
             shop.UseSkin(skinId);
     }

@@ -16,7 +16,7 @@ MonoBehaviour:
   - skinId: 0
     skinName: Plane2
     icon: {fileID: 0}
-    bulletPrefab: {fileID: 1997882812359486, guid: a042c70864cb14b4788110c1d5820c10,
+    bulletPrefab: {fileID: 1170744857039610, guid: acd0fddb199f67b4180dc06389417be9,
       type: 3}
     bombPrefab: {fileID: 100006, guid: 61a1e6651c59e564c939c24df7567bb9, type: 3}
     price: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
     bulletPrefab: {fileID: 1391574063814312, guid: 653e1fc56168e5644afd670498680ccd,
       type: 3}
     bombPrefab: {fileID: 100004, guid: 2e83c1934a135b24d8e3c8e84187fa23, type: 3}
-    price: 100
+    price: 600
     defaultUnlocked: 0
   - skinId: 2
     skinName: Plane12
@@ -35,7 +35,7 @@ MonoBehaviour:
     bulletPrefab: {fileID: 1846563170864394, guid: 39c9755a25dc5e349a8042e712786203,
       type: 3}
     bombPrefab: {fileID: 100004, guid: 400a764052faac54b8191e6f823fbd96, type: 3}
-    price: 500
+    price: 1500
     defaultUnlocked: 0
   - skinId: 3
     skinName: Spitfire1
@@ -43,7 +43,7 @@ MonoBehaviour:
     bulletPrefab: {fileID: 1661707786246352, guid: 5f3cfe3ce3465e840876df279bfdf110,
       type: 3}
     bombPrefab: {fileID: 100004, guid: 400a764052faac54b8191e6f823fbd96, type: 3}
-    price: 1000
+    price: 3000
     defaultUnlocked: 0
   - skinId: 4
     skinName: Edge540_S5
@@ -51,5 +51,5 @@ MonoBehaviour:
     bulletPrefab: {fileID: 1603392920371116, guid: bdd90c28169e7a243b2f1ad2f28ce996,
       type: 3}
     bombPrefab: {fileID: 100004, guid: 2e83c1934a135b24d8e3c8e84187fa23, type: 3}
-    price: 5000
+    price: 6000
     defaultUnlocked: 0

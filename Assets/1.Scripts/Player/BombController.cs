@@ -60,7 +60,7 @@ public class BombController : MonoBehaviour
             }
         }
 
-
+        GamePlaySoudVFX.Instance.BoomPlay();
         GameObject eff =  Instantiate(explosionFX, transform.position + new Vector3(0,1,0), Quaternion.identity);
         Destroy(eff, 0.3f);
         Destroy(gameObject);

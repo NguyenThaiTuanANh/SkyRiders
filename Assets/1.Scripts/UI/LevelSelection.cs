@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,5 +37,24 @@ public class LevelSelection : MonoBehaviour
         if (GameSceneManager.Instance != null)
             GameSceneManager.Instance.LoadGamePlaySceneForLevel(levelIndex);
     }
+    //public void OnClickLevel()
+    //{
+    //    StartCoroutine(LoadLevelWithDelay());
+    //}
+
+    //private IEnumerator LoadLevelWithDelay()
+    //{
+    //    // Bật loading
+    //    UIMainMenu.Instance.Loading.SetActive(true);
+
+    //    // Chờ 5 giây
+    //    yield return new WaitForSeconds(5f);
+
+    //    // Sau 5 giây mới load scene
+    //    if (GameSceneManager.Instance != null)
+    //    {
+    //        GameSceneManager.Instance.LoadGamePlaySceneForLevel(levelIndex);
+    //    }
+    //}
 
 }
